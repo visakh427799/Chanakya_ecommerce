@@ -1,8 +1,9 @@
 const express= require('express');
 const bcrypt = require('bcrypt');
 const User   = require('../model/user_model');
-
-
+const jwt    = require('jsonwebtoken');
+const jwtKey = "my_secret_key"
+const jwtExpirySeconds = 300
 const Login=(req,res,next)=>{
 
     let email=req.body.email;
@@ -13,9 +14,21 @@ const Login=(req,res,next)=>{
             
             bcrypt.compare(password,data.password,(err,value)=>{
                if(value){
-                   res.json({
-                       "Message":"Login success"
-                   })
+                   
+               const username={
+                   name:data.username,
+             
+               }
+
+              const token = jwt.sign({ username }, jwtKey, {
+                algorithm: "HS256",
+                expiresIn: "60d",
+            })
+            console.log("token:", token)
+              
+              res.cookie('token',token);
+              res.send("Cookie Set ,and login success"); 
+
                }
                else{
                 res.json({

@@ -1,6 +1,42 @@
 <html>
     <head>
         <title>Sign up</title>
+        <style>
+            .box{
+ 
+ width:400px;
+ height:350px;
+ 
+ margin:20px 400px;
+ border:0px solid rgb(84, 22, 97);
+ position:relative;
+ 
+ }
+ 
+ 
+ input{
+   border:0px;
+   height:60px;
+   width:320px;
+   border-radius:5px;
+ background-color: #29013b;
+ color:#ffffff;
+ font-size: 23px;
+ padding-left: 20px;
+ 
+ }
+ 
+ .k:hover{
+ background-color:#a652e2;
+ }
+ ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+ color: rgb(255, 253, 253);
+ opacity: 1; /* Firefox */
+ }
+ 
+ 
+ 
+    </style>
     </head>
 
 
@@ -8,17 +44,17 @@
 
         <div class="box">
               <form action="/signup" method="POST">
-                    <input type="text" name="username" placeholder="please enter your user name"><br><br>
+                    <input type="text" name="username" placeholder=" User name"><br><br>
 
-                    <input type="email" name="email" placeholder="please enter your email"><br><br>
+                    <input type="email" name="email" placeholder=" Email"><br><br>
 
-                    <input type="number" name="phone" placeholder="please enter your phone number"><br><br>
+                    <input type="number" name="phone" placeholder=" Phone number"><br><br>
 
-                    <input type="password" name="pass1" placeholder="please enter your password"><br><br>
+                    <input type="password" name="pass1" placeholder=" Password"><br><br>
 
-                    <input type="password" name="pass2" placeholder="please confirm your password"><br><br>
+                    <input type="password" name="pass2" placeholder=" Confirm your password"><br><br>
 
-                    <input type="submit" value="SUBMIT">
+                    <input type="submit" class="k" value="SUBMIT">
               </form>
 
 

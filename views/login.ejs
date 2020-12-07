@@ -1,6 +1,43 @@
 <html>
    <head>
-      
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="342607950887-dtqd7uqnu182rmfhtii2mg7cdr7dhei4.apps.googleusercontent.com">
+   <style>
+           .box{
+
+width:400px;
+height:350px;
+
+margin:20px 400px;
+border:0px solid rgb(84, 22, 97);
+position:relative;
+
+}
+
+
+input{
+  border:0px;
+  height:60px;
+  width:320px;
+  border-radius:5px;
+background-color: #29013b;
+color:#ffffff;
+font-size: 23px;
+padding-left: 20px;
+
+}
+
+.k:hover{
+background-color:#8942bb;
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+color: rgb(255, 253, 253);
+opacity: 1; /* Firefox */
+}
+
+
+
+   </style>
    </head>
    <body>
      <div class="box">
@@ -8,10 +45,61 @@
         
              <input type="email" name="email" placeholder="Enter your email" required><br><br>
              <input type="password" name="pass" placeholder="Entr your password" required><br><br>
-             <input type="submit" value="Login">
+             <input type="submit" class="k" value="Login">
         
         
         </form>
+
+
+<div >
+  <h1>Login with google</h1>    
+  <div class="g-signin2" data-onsuccess="onSignIn"></div>
+</div> 
+        <script>
+
+
+        function onSignIn(googleUser) {
+
+          var id_token = googleUser.getAuthResponse().id_token;
+          
+
+          const todo = {
+            title: 'test'
+             };
+
+            fetch('/google', {
+                    method: 'POST',
+                    body: JSON.stringify(todo),
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8',
+                        token        : id_token
+                    }
+                })
+                .then(response => response.json())
+                .then(json => {
+                    console.log(json);
+                });
+
+                        
+                     /* var profile = googleUser.getBasicProfile();
+                      console.log("hiii")
+                      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+                      console.log('Name: ' + profile.getName());
+                      console.log('Image URL: ' + profile.getImageUrl());
+                      console.log('Email: ' + profile.getEmail());*/
+          }    
+       </script>
+
+       <a href="#" role="button" onclick="signOut();">Sign out</a>
+       <script>
+              function signOut() {
+                var auth2 = gapi.auth2.getAuthInstance();
+                auth2.signOut().then(function () {
+                  console.log('User signed out.');
+                  
+                });
+            }
+      </script>
      </div>
    </body>
 </html>
