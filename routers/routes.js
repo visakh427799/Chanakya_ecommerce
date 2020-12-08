@@ -3,8 +3,9 @@ const router = express.Router();
 const Sign   = require('../controllers/register_control');
 const Log  = require('../controllers/login_control');
 const GoogleAuth=require('../controllers/google_auth_control');
+const FacebookbAuth    =require('../controllers/facebook_auth_control');
 const jwt       =require('jsonwebtoken')
-const jwtKey = "my_secret_key"
+
 //setting up of routes
 
 //middleares for cookie 
@@ -34,25 +35,29 @@ const jwtKey = "my_secret_key"
                 
                   if(Mytoken===undefined){
                               console.log("No token ")
+                              next();
                         }
 
                         else{
                                       
                            Mytoken=Mytoken.token;
-                           jwt.verify(Mytoken, jwtKey,(err,decoded)=>{
+                           jwt.verify(Mytoken, process.env.SECRET_KEY,(err,decoded)=>{
                                  if(err){
-                                       console.log(err)
+                                       console.log("Token validity expired")
+                                       next();
                                  }
                                  else{
-                                       console.log(decoded)
-                                       console.log("Already logged in  go to next page")
+                                      // console.log(decoded)
+                                       //console.log("Already logged in  go to next page");
+                                       //let email=""
+                                       res.render('welcome.ejs');
                                  }
 
                            });
                            
                               
                         }
-                  next();
+                  
                   }
 
 
@@ -67,8 +72,13 @@ router.get('/signup',(req,res)=>{
 router.get('/login',tokenVerify,(req,res)=>{
       res.render('login.ejs');
   })
+router.get('/logout',(req,res)=>{
+      res.clearCookie('token');
+      res.redirect("login")
+})
 router.post('/google',tokenVerify,GoogleAuth.GoogAuth)
 router.post('/signup',Sign.Signup);
 router.post('/login',Log.Login);
+router.post('/facebook',FacebookbAuth.FbAuth);
 
 module.exports=router;

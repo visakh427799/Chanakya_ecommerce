@@ -1,8 +1,6 @@
 const {OAuth2Client} = require('google-auth-library');
-const CLIENT_ID      ='342607950887-dtqd7uqnu182rmfhtii2mg7cdr7dhei4.apps.googleusercontent.com'
-const client = new OAuth2Client(CLIENT_ID);
+const client = new OAuth2Client(process.env.CLIENT_ID);
 const User   = require('../model/user_model');
-const jwtKey = "my_secret_key"
 
 
 
@@ -16,7 +14,7 @@ const jwt     =require('jsonwebtoken')
    async function verify() {
          const ticket = await client.verifyIdToken({
              idToken: token,
-             audience: CLIENT_ID,  // Specify the CLIENT_ID of the app that accesses the backend
+             audience:process.env.CLIENT_ID,  // Specify the CLIENT_ID of the app that accesses the backend
              // Or, if multiple clients access the backend:
              //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
          });
@@ -37,22 +35,23 @@ const jwt     =require('jsonwebtoken')
                     User.findOne({email:email},(err,data)=>{
                         if(data){
                             
-
+                            let uname=data.username;
+                            let email=data.email;
                             const username={
-                                name:data.username,
+                                name:uname,
                           
                             }
              
-                            const token = jwt.sign({ username }, jwtKey, {
+                            const token = jwt.sign({ username },process.env.SECRET_KEY, {
                                 algorithm: "HS256",
                                 expiresIn: "60d",
                             })
                             //console.log(token );
                             res.cookie('token',token);
-                            res.json({
+                           /* res.json({
                                 "Message":"An account with this email id already exist  and cokie set"
-                            })
-                           
+                            })*/
+                            res.render('welcome')
                         }
                         else{
                             //storing the datas and hashed passord into an object and inserting it into collection 'User'
@@ -64,7 +63,7 @@ const jwt     =require('jsonwebtoken')
                                     })
                                 }
                                 else{
-                                    
+                                    let email=data.email;
                                     const username={
                                         name:data.username,
                                   
@@ -74,10 +73,10 @@ const jwt     =require('jsonwebtoken')
                                         algorithm: "HS256",
                                         expiresIn: "60d",
                                     })
-                                    console.log(token );
+                                    //console.log(token );
                                     res.cookie('token',token);
-                                    res.send("Registration success and Cookie Set"); 
-
+                                    //res.send("Registration success and Cookie Set"); 
+                                    res.render('welcome')
                                 }
                             })
 

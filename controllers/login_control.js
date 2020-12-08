@@ -2,7 +2,7 @@ const express= require('express');
 const bcrypt = require('bcrypt');
 const User   = require('../model/user_model');
 const jwt    = require('jsonwebtoken');
-const jwtKey = "my_secret_key"
+
 const jwtExpirySeconds = 300
 const Login=(req,res,next)=>{
 
@@ -20,14 +20,15 @@ const Login=(req,res,next)=>{
              
                }
 
-              const token = jwt.sign({ username }, jwtKey, {
+              const token = jwt.sign({ username }, process.env.SECRET_KEY, {
                 algorithm: "HS256",
                 expiresIn: "60d",
             })
             console.log("token:", token)
               
               res.cookie('token',token);
-              res.send("Cookie Set ,and login success"); 
+             // res.send("Cookie Set ,and login success"); 
+              res.render('welcome')
 
                }
                else{
