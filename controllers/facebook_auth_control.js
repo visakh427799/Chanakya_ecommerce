@@ -22,7 +22,7 @@ const FbAuth=(req,res,next)=>{
    /* res.json({
         "Message":"An account with this email id already exist  and cokie set"
     })*/
-    res.render('welcome')
+    res.redirect('/login')
     next();
 
 }

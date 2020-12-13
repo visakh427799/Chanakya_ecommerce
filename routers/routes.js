@@ -5,7 +5,15 @@ const Log  = require('../controllers/login_control');
 const GoogleAuth=require('../controllers/google_auth_control');
 const FacebookbAuth    =require('../controllers/facebook_auth_control');
 const jwt       =require('jsonwebtoken')
-
+const Items_add = require('../controllers/items_add_control')
+const Item_list = require('../controllers/items_display_control_admin');
+const Item_list_u = require('../controllers/items_display_control_user');
+const cartAdd    = require('../controllers/cart_add_control');
+const CartShow  =require('../controllers/cart_show_controll');
+const cart_plus = require('../controllers/add_cart_number_controll');
+const remove_cart=require('../controllers/remove_from_cart_controll');
+const admin_users=require('../controllers/all_user_show_controll');
+const cart_minus = require('../controllers/minus_cart_number_controll');
 //setting up of routes
 
 //middleares for cookie 
@@ -35,7 +43,7 @@ const jwt       =require('jsonwebtoken')
                 
                   if(Mytoken===undefined){
                               console.log("No token ")
-                              next();
+                              res.render('user_login')
                         }
 
                         else{
@@ -44,13 +52,15 @@ const jwt       =require('jsonwebtoken')
                            jwt.verify(Mytoken, process.env.SECRET_KEY,(err,decoded)=>{
                                  if(err){
                                        console.log("Token validity expired")
-                                       next();
+                                       res.render('user_login')
                                  }
                                  else{
                                       // console.log(decoded)
                                        //console.log("Already logged in  go to next page");
                                        //let email=""
-                                       res.render('welcome.ejs');
+                                       res.user=decoded;
+                                      next()
+                                      
                                  }
 
                            });
@@ -63,22 +73,32 @@ const jwt       =require('jsonwebtoken')
 
 
 
-router.get('/',(req,res)=>{
-    res.send("Home page");
-  })
+router.get('/',Item_list_u.Item_show_u)
+router.get('/admin',tokenVerify,Item_list.Item_show)
+router.get('/admin/allusers',tokenVerify,admin_users.UserShow)
+router.get('/admin/add-products',tokenVerify,(req,res)=>{
+      res.render('add_products');
+    })    
+
 router.get('/signup',(req,res)=>{
     res.render('signup.ejs');
   })
-router.get('/login',tokenVerify,(req,res)=>{
-      res.render('login.ejs');
-  })
+router.get('/login',tokenVerify,Item_list_u.Item_show_u)
 router.get('/logout',(req,res)=>{
       res.clearCookie('token');
       res.redirect("login")
 })
+router.get('/addtocart/:item',tokenVerify,cartAdd.cart_add);
+router.get('/cart',tokenVerify,CartShow.Cart_show);
+router.get('addcartitem/cart',tokenVerify,CartShow.Cart_show);
+router.get('/addcartitem/:id',cart_plus.addNumber);
+router.get('/minuscartitem/:id',cart_minus.minusCart);
+router.get('/removecartitem/:id',remove_cart.removeCart)
+                  
 router.post('/google',tokenVerify,GoogleAuth.GoogAuth)
 router.post('/signup',Sign.Signup);
 router.post('/login',Log.Login);
 router.post('/facebook',FacebookbAuth.FbAuth);
+router.post('/additems',Items_add.ItemAdd);
 
 module.exports=router;

@@ -1,62 +1,62 @@
-<html>
-   <head>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="342607950887-dtqd7uqnu182rmfhtii2mg7cdr7dhei4.apps.googleusercontent.com">
+<%-include('./layouts/user_header')-%>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 
-   <style>
-           .box{
+        <div class="row align-content-center bg-white ml-lg-5 " >
+            <div class="col-md-4 p-5 bg-white " >
 
-width:400px;
-height:350px;
+            </div>
+           
+             <div class="col-md-4 p-5 bg-white " >
+                <center><h5 class="text-danger"></h5></center>
+                <h1 class="text-info text-center">Login</h1>
+                <form action="/login" method="POST">
+                   
+                   
+                    
+                    <div class="form-group">
+                      <label for="inputAddress">Email</label>
+                      <input type="email" class="form-control  " name="email" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                      <label for="inputAddress">  password</label>
+                      <input type="password" class="form-control  " name="pass" placeholder="Enter your password">
+                    </div>
+                    
+                    <div class="mt-4">
+                    <button  type="submit" class="btn btn-primary">Sign in</button>
+                    </div>
+                  </form>
 
-margin:20px 400px;
-border:0px solid rgb(84, 22, 97);
-position:relative;
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <h5>Login with facebook</h5>
+                        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+                        </fb:login-button>
+                        
+                        <div id="status">
+                        </div>
 
-}
-
-
-input{
-  border:0px;
-  height:60px;
-  width:320px;
-  border-radius:5px;
-background-color: #29013b;
-color:#ffffff;
-font-size: 23px;
-padding-left: 20px;
-
-}
-
-.k:hover{
-background-color:#8942bb;
-}
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-color: rgb(255, 253, 253);
-opacity: 1; /* Firefox */
-}
-
-
-
-   </style>
-   </head>
-   <body>
-     <div class="box">
-        <form action="/login" method="POST">
-        
-             <input type="email" name="email" placeholder="Enter your email" required><br><br>
-             <input type="password" name="pass" placeholder="Entr your password" required><br><br>
-             <input type="submit" class="k" value="Login">
-        
-        
-        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Login with google</h5>    
+                         <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                    </div>
+                </div>  
 
 
-<div >
-  <h1>Login with google</h1>    
-  <div class="g-signin2" data-onsuccess="onSignIn"></div>
-</div> 
-        <script>
+                </div>
+
+                <div class="col-md-4 p-5 bg-white " >
+                
+                </div>
+
+             
+
+            
+        </div>
+
+    </div>
+    <script>
 
 
         function onSignIn(googleUser) {
@@ -91,7 +91,7 @@ opacity: 1; /* Firefox */
           }    
        </script>
 
-       <a href="/logout" role="button" onclick="signOut();">Sign out</a>
+    
        <script>
               function signOut() {
                 var auth2 = gapi.auth2.getAuthInstance();
@@ -174,18 +174,11 @@ opacity: 1; /* Firefox */
   </script>
 
 
-
-     </div>
-
-     <h1>Login with facebook</h1>
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
-
-<div id="status">
-</div>
-
-
-     <div id="fb-root"></div>
+   
+<div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0&appId=952647761932381&autoLogAppEvents=1" nonce="P6koDhPv"></script>
-   </body>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>    
+</body>
 </html>

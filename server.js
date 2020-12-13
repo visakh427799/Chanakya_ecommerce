@@ -18,6 +18,7 @@ app.use(cors);
 app.use(express.json())
 app.use(bodyParser.json());
 app.use(cookieParser)
+app.use(express.static('public'));
 
 //starting the server on port 8000 using app.listen() function
 app.listen(PORT,(err)=>{

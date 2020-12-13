@@ -1,0 +1,54 @@
+<%-include('./layouts/user_header')-%>
+<center><h2 style="color:rgb(14, 7, 11)">My Cart (<%=data.length%>)</h2></center>
+
+<%if (data.length>0){%>
+
+    
+
+        <% data.forEach((el)=>{%>
+            <div class="row m-3 bg-light">   
+               
+                     
+               <div class="col-md-4 ">
+                <div class="card" style="width:12rem;">
+                   <img class="card-img-top" src="<%=el.item_image%>" alt="Card image cap"></div> 
+               </div>
+                   <div class="col-md-4 mt-3">
+                        <h5 class="card-title"><%=el.item_name%></h5>
+                        <p class="card-text"><%=el.item_desc%></p>
+                       <p class="card-text"> Nos <%=el.item_nos%></p>
+                        <h5 class="card-title">Prize: <%=el.item_prize*el.item_nos%> /-</h5>
+                        
+                        
+                    </div> 
+               <div class="col-md-4 mt-4">
+                <a class="btn btn-success" href="/addcartitem/<%=el.item_id%>">+</a>
+                <a class="btn btn-primary" href="/minuscartitem/<%=el.item_id%>">-</a> 
+                <a class="btn btn-danger" href="/removecartitem/<%=el._id%>">Remove</a> 
+
+               </div> 
+             
+    
+           
+         
+</div> 
+<%})%>
+
+<center> <h5 class="card-title">Total Prize: <%=sum%> /-</h5><button class="btn btn-warning">Place Order</button></center> 
+
+<% } else{ %>  
+  <div class="row m-5 bg-light">
+        
+         <div class="col-md-4 "></div>
+         <div class="col-md-4 mt-3">
+             <center><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZx2E_3IrQj0BpQcTO3NKA3j7MpfETmTACiA&usqp=CAU" ></center>
+             <center><h4 class="mt-2 ">Your cart is empty </h4></center>
+             <center><a href="/" class="btn btn-warning mt-4 mb-5 ">Shop Now</a></center>
+         </div>
+         <div class="col-md-4"></div>
+        
+       
+  </div>
+ 
+ <% } %>
+ 

@@ -1,0 +1,32 @@
+<%-include('./layouts/admin_header');-%>
+
+<a class="btn btn-success m-4" href="/admin/add-products">Add products</a>
+
+<section>
+    <div class="row m-3">
+        <table class="table">
+            <thead class=" table-dark">
+              <tr>
+                <th scope="col">User-name</th>
+                <th scope="col">User-Email</th>
+                <th scope="col">User-Phone</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+
+       <% data.forEach(function(item){ %>
+
+              <tr>
+               
+                <td><%=item.username%></td>
+                <td><%=item.email%></td>
+                <td><%=item.phone%></td>
+                
+              </tr>
+         <% }) %>    
+            </tbody>
+          </table>
+
+    </div>
+</section>

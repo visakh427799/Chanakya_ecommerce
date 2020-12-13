@@ -1,0 +1,62 @@
+<%-include('./layouts/admin_header')-%>
+<div class="section bg-light ">
+    <div class="row align-content-center bg-light pl-lg-5 " >
+        <div class="col-md-2 p-4 bg-light " >
+
+        </div>
+         <div class="col-md-8 p-4 bg-light ml-5 " >
+            <h1 class="text-success text-center">Add Products</h1>
+            <form action="/additems" method="POST">
+               
+                <div class="form-row ">
+                  <div class="form-group col-md-6">
+                    <label for="inputEmail4">Item name</label>
+                    <input type="text" class="form-control"  name="inputName"  required>
+                  </div>
+                  
+                  <div class="form-group col-md-6">
+                    <label for="inputEmail4">Item category</label>
+                    <input type="text" class="form-control"  name="inputCategory"  required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputPassword4">Item prize</label>
+                    <input type="number" class="form-control  " name="inputPrize"   required>
+                  </div>
+                  
+                  
+                  <div class="form-group col-md-6">
+                    <label for="inputEmail4">Item image link</label>
+                    <input type="text" class="form-control"  name="inputImg"  required>
+                  </div>
+                  
+                  <div class="form-group col-md-6">
+                    <label for="inputEmail4">Item description</label>
+                    <input type="text" class="form-control"  name="inputDesc"  required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputEmail4">Item stock</label>
+                    <input type="number" class="form-control"  name="inputStock"  required>
+                  </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Item availability</label>
+                    <input type="checkbox"  value="yes" name="inputAvail" >
+                  </div>
+                
+               
+                
+                <div class="mt-2">
+                <button  type="submit"  class="btn btn-primary">Add Item</button>
+            </div>
+            </form>
+
+              
+            </div>
+
+            <div class="col-md-2 p-4 bg-light " >
+
+            </div>
+
+            </div>
+
+            </div>

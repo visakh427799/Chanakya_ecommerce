@@ -46,12 +46,13 @@ const jwt     =require('jsonwebtoken')
                                 algorithm: "HS256",
                                 expiresIn: "60d",
                             })
-                            //console.log(token );
+                            console.log(token );
                             res.cookie('token',token);
+                            
                            /* res.json({
                                 "Message":"An account with this email id already exist  and cokie set"
                             })*/
-                            res.render('welcome')
+                            res.redirect('/login')
                         }
                         else{
                             //storing the datas and hashed passord into an object and inserting it into collection 'User'
@@ -76,7 +77,7 @@ const jwt     =require('jsonwebtoken')
                                     //console.log(token );
                                     res.cookie('token',token);
                                     //res.send("Registration success and Cookie Set"); 
-                                    res.render('welcome')
+                                    res.redirect('/login')
                                 }
                             })
 
