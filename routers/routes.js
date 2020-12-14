@@ -93,9 +93,12 @@ router.get('/cart',tokenVerify,CartShow.Cart_show);
 router.get('addcartitem/cart',tokenVerify,CartShow.Cart_show);
 router.get('/addcartitem/:id',cart_plus.addNumber);
 router.get('/minuscartitem/:id',cart_minus.minusCart);
-router.get('/removecartitem/:id',remove_cart.removeCart)
-                  
-router.post('/google',tokenVerify,GoogleAuth.GoogAuth)
+router.get('/removecartitem/:id',remove_cart.removeCart); 
+router.get('/shop',(req,res)=>{
+      res.render('shop')
+})
+
+router.post('/google',tokenVerify,GoogleAuth.GoogAuth);
 router.post('/signup',Sign.Signup);
 router.post('/login',Log.Login);
 router.post('/facebook',FacebookbAuth.FbAuth);

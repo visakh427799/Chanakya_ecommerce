@@ -6,6 +6,7 @@ const routers  =require('./routers/routes')
 const PORT     =8000||process.env.PORT;
 const cors     =require('cors');
 const cookieParser=require('cookie-parser')
+const path      = require('path')
 require('./dbconnection'); 
 
 app.use(bodyParser.urlencoded({extended:false}));
@@ -18,7 +19,7 @@ app.use(cors);
 app.use(express.json())
 app.use(bodyParser.json());
 app.use(cookieParser)
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname ,"public")));
 
 //starting the server on port 8000 using app.listen() function
 app.listen(PORT,(err)=>{

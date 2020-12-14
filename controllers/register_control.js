@@ -49,10 +49,7 @@ const Signup=(req,res,next)=>{
                                 })
                             }
                             else{
-                                res.json({
-                                    "Message":"Registration success",
-                                    "Data":data
-                                })
+                                res.redirect('/login')
                             }
                         })
 
