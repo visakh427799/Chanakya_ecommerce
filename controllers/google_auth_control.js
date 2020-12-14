@@ -32,13 +32,14 @@ const jwt     =require('jsonwebtoken')
        }
        console.log(userobj);
        //saving values in mongodb
-                    User.findOne({email:email},(err,data)=>{
+                     User.findOne({email:email},(err,data)=>{
                         if(data){
                             
                             let uname=data.username;
                             let email=data.email;
                             const username={
                                 name:uname,
+                                u_id:data._id,
                           
                             }
              
@@ -48,11 +49,15 @@ const jwt     =require('jsonwebtoken')
                             })
                             console.log(token );
                             res.cookie('token',token);
+                            res.redirect('/login')
                             
                            /* res.json({
                                 "Message":"An account with this email id already exist  and cokie set"
                             })*/
-                            res.redirect('/login')
+                           //res.send("Registration success and Cookie Set"); 
+                           
+                         
+                        
                         }
                         else{
                             //storing the datas and hashed passord into an object and inserting it into collection 'User'
@@ -67,17 +72,23 @@ const jwt     =require('jsonwebtoken')
                                     let email=data.email;
                                     const username={
                                         name:data.username,
+                                        u_id:data._id,
                                   
                                     }
                      
-                                    const token = jwt.sign({ username }, jwtKey, {
+                                    const token = jwt.sign({ username }, process.env.SECRET_KEY, {
                                         algorithm: "HS256",
                                         expiresIn: "60d",
                                     })
                                     //console.log(token );
                                     res.cookie('token',token);
+                                    console.log(token)
                                     //res.send("Registration success and Cookie Set"); 
+                                    
                                     res.redirect('/login')
+                                     
+                                    
+                                   
                                 }
                             })
 

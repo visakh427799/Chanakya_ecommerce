@@ -98,7 +98,7 @@ router.get('/shop',(req,res)=>{
       res.render('shop')
 })
 
-router.post('/google',tokenVerify,GoogleAuth.GoogAuth);
+router.post('/google',GoogleAuth.GoogAuth);
 router.post('/signup',Sign.Signup);
 router.post('/login',Log.Login);
 router.post('/facebook',FacebookbAuth.FbAuth);
