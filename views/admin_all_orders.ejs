@@ -1,0 +1,43 @@
+<%-include('./layouts/admin_header');-%>
+
+
+<section>
+    <center><h3 class="text-info">ALL ORDERS</h3></center>
+    <div class="row m-3">
+        <table class="table">
+            <thead class=" table-dark">
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Mobile</th>
+                <th scope="col">Pincode</th>
+                <th scope="col">Order id</th>
+                
+                <th scope="col">Total prize</th>
+                <th scope="col">Payment method</th>
+                <th scope="col">Payment status</th>
+                <th scope="col">order status</th>
+              </tr>
+            </thead>
+            <tbody>
+
+       <% data.forEach(function(order){ %>
+
+              <tr>
+               
+                <td><%=order.Address.Name%></td>
+                <td><%=order.Address.Mobile%></td>
+                <td><%=order.Address.Pincode%></td>
+                <td><%=order._id%></td>
+               
+                <td><%=order.Total%></td>
+                <td><%=order.Payment_method%></td>
+                <td><%=order.Payment_status%></td>
+                <td><%=order.Order_status%></td>
+               
+              </tr>
+         <% }) %>    
+            </tbody>
+          </table>
+
+    </div>
+</section>

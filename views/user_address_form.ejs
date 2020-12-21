@@ -1,0 +1,98 @@
+
+<%-include('./layouts/user_header')-%>
+<div class="row">
+<%if(data.length!==0){%>
+
+    <div class="row m-5 bg-light">
+        
+        <div class="col-md-4 "></div>
+        <div class="col-md-4 mt-3">
+           
+            <center><h5 class="text-danger pl-2">Saved adresses</h5>
+                <div class="card" style="width: 38rem;">
+                    
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Name:<%=data.Name%></li>
+                      <li class="list-group-item">Pin:<%=data.Pincode%></li>
+                    <form action="/cart/address" method="POST">
+                      <button class="btn btn-success">Address found deliver to this loaction??</button>
+                    </form> 
+                    </ul>
+                  </div
+            </center>
+            
+        </div>
+        <div class="col-md-4"></div>
+       
+      
+ </div>
+
+    
+<%}%>
+<div class="row ml-4 bg-light">
+        
+    <div class="col-md-6 ml-4 ">
+        <h1 class="text-info text-center">Add New address</h1>
+        <form action="/cart/address" method="POST">
+           
+            <div class="form-row ">
+              <div class="form-group ">
+                <label for="inputEmail4">name</label>
+                <input type="text" class="form-control"  name="name" placeholder="name" required>
+              </div>
+              <div class="form-group ">
+                <label for="inputPassword4">pincode</label>
+                <input type="text" class="form-control  " name="pin" placeholder="pincode"   required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputAddress">Phone</label>
+              <input type="number" class="form-control  " name="phone" placeholder="Phone" required>
+            </div>
+            <div class="form-group">
+              <label for="inputAddress">Locality</label>
+              <input type="text" class="form-control  " name="loc" placeholder="Locality" required>
+            </div>
+            <div class="form-group">
+                <label for="inputAddress">Address</label>
+                <textarea class="form-control  " name="address" placeholder="Address" required></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="inputAddress">City/district/town</label>
+                <input type="text" class="form-control  " name="city" placeholder="City/district/town" required>
+              </div>
+              <div class="form-group">
+                <label for="inputAddress">State</label>
+                <input type="text" class="form-control  " name="state" placeholder="state" required>
+              </div>
+            
+            <div class="mt-4">
+            <center><button  type="submit" class="btn btn-warning">Add Address</button></center>
+        </div>
+          </form>
+    
+    </div>
+    <div class="col-md-6 ">
+        <h5 >Price details</h5>
+    <div class="card" style="width: 38rem;">
+        
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Price:<%=sum%></li>
+          <li class="list-group-item">Delivery charge:0</li>
+          <li class="list-group-item">Total payable:<%=sum%></li>
+        </ul>
+      </div
+    </div>
+        
+</div>
+    
+
+
+
+
+
+
+
+
+

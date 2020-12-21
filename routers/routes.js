@@ -14,6 +14,11 @@ const cart_plus = require('../controllers/add_cart_number_controll');
 const remove_cart=require('../controllers/remove_from_cart_controll');
 const admin_users=require('../controllers/all_user_show_controll');
 const cart_minus = require('../controllers/minus_cart_number_controll');
+const add_address = require('../controllers/user_address_controll');
+const Check =require('../controllers/payment_control');
+const Add_form = require('../controllers/user_address_form_controll');
+const Orders   = require('../controllers/order_control');
+const All_order=require('../controllers/all_orders_show_controll');
 //setting up of routes
 
 //middleares for cookie 
@@ -71,11 +76,12 @@ const cart_minus = require('../controllers/minus_cart_number_controll');
                   }
 
 
-
+//routes
 
 router.get('/',Item_list_u.Item_show_u)
 router.get('/admin',tokenVerify,Item_list.Item_show)
 router.get('/admin/allusers',tokenVerify,admin_users.UserShow)
+router.get('/admin/allorders',tokenVerify,All_order.All_orders)
 router.get('/admin/add-products',tokenVerify,(req,res)=>{
       res.render('add_products');
     })    
@@ -94,8 +100,19 @@ router.get('addcartitem/cart',tokenVerify,CartShow.Cart_show);
 router.get('/addcartitem/:id',cart_plus.addNumber);
 router.get('/minuscartitem/:id',cart_minus.minusCart);
 router.get('/removecartitem/:id',remove_cart.removeCart); 
-router.get('/shop',(req,res)=>{
-      res.render('shop')
+router.get('/cart/address',tokenVerify,Add_form.Address_form);
+router.get('/cart/address/order',tokenVerify,Orders.Order_item);
+router.get('/cart/address/confirm',(req,res)=>{
+    res.render('confirm')
+});
+router.get('/cart/address/success',(req,res)=>{
+      res.render('success')
+  });
+router.get('/success',(req,res)=>{
+      res.render('success');
+})
+router.get('/cancel',(req,res)=>{
+      res.render('cancel');
 })
 
 router.post('/google',GoogleAuth.GoogAuth);
@@ -103,5 +120,7 @@ router.post('/signup',Sign.Signup);
 router.post('/login',Log.Login);
 router.post('/facebook',FacebookbAuth.FbAuth);
 router.post('/additems',Items_add.ItemAdd);
+router.post('/cart/address',tokenVerify,add_address.Add_address);
+router.post('/payment',Check.Check_out);
 
 module.exports=router;
